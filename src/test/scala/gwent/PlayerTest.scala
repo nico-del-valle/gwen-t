@@ -8,12 +8,16 @@ import munit.FunSuite
 class PlayerTest extends FunSuite {
   val name1: String = "Geralt"
   val name2: String = "Ciri"
-  var Deck1 = Seq.empty
+  var Deck1 = List()
   var Hand1 = List()
   var Hand2 = List()
 
+  val Card1 = new MeleeCard(name1, "a", 1)
+  val Card2 = new RangedCard(name2, "a", 2)
+  val Card3 = new SiegeCard(name2, "a", 3  )
+  val Card4 = new WeatherCard(name1, "a")
 
-
+  val Deck3 = List(Card1, Card2, Card3, Card4)
 
   var Player1: Player = _
   var Player2: Player = _
@@ -21,9 +25,9 @@ class PlayerTest extends FunSuite {
   var NoPlayer: Object = _
 
   override def beforeEach(context: BeforeEach): Unit = {
-    Player1 = new Player(name1)
-    Player2 = new Player(name1)
-    Player3 = new Player(name2)
+    Player1 = new Player(name1, Hand1, Deck1)
+    Player2 = new Player(name1, Hand2 , Deck1)
+    Player3 = new Player(name2, Hand2, Deck3)
     NoPlayer = new Object()
   }
 
@@ -42,7 +46,7 @@ class PlayerTest extends FunSuite {
     }
 
     test("A player has a hand") {
-      assert(Player1.hand.cards.toList == Hand1)
+      assertEquals(Player1.hand, Hand1)
 
     }
 
@@ -57,6 +61,21 @@ class PlayerTest extends FunSuite {
       assertEquals(Player1.gems, 0) // It can be less than 0
     }
 
+    test("A player can shuffle his deck"){
+      val shuffled = Player3.shuffleDeck()
+      assertEquals(Player3.deck.toSet , Deck3.toSet)
+    }
+    test("A player can draw cards from the deck to hand"){
+      val drawnCard = Player3.drawCard()
+      assert(!Player3.deck.contains(drawnCard))
+
+    }
+
+    test("After draw the deck has 1 less card"){
+      val deckSize = Player3.deck.size
+      Player3.drawCard()
+      assertEquals(Player3.deck.size, deckSize - 1 )
+    }
     test("If two player have the same name should be the same"){
       assertEquals(Player1, Player2)
       assertNotEquals(Player2, Player3)

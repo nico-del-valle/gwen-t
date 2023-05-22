@@ -9,14 +9,14 @@ package gwent
  * @constructor Creates a Climate Card with the specified name
  *
  */
-private class ClimateCard (val name: String) extends Card {
+private class WeatherCard(val name: String, val description: String) extends Card {
 
   /** The type of the cards
    *
    * Describes where it can be placed
    */
 
-  val tipo = "Climate"
+  val Cardtype = "Weather"
 
   /**
    * 
@@ -26,7 +26,8 @@ private class ClimateCard (val name: String) extends Card {
 
   override def equals(obj: Any): Boolean = {
     obj match {
-      case card: ClimateCard => card.name == this.name && card.tipo == this.tipo
+      case card: WeatherCard => card.name == this.name && card.Cardtype == this.Cardtype
+        && card.description == this.description
       case _ => false
     }
   }

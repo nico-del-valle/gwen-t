@@ -4,20 +4,21 @@ package gwent
 import munit.FunSuite
 
 
-class ClimateCardTest extends FunSuite {
+class WeatherCardTest extends FunSuite {
   val name1: String = "Geralt"
   val name2: String = "Ciri"
+  val description: String = "a"
 
 
-  var ClimateCard1: ClimateCard = _
-  var ClimateCard2: ClimateCard = _
-  var ClimateCard3: ClimateCard = _
+  var ClimateCard1: WeatherCard = _
+  var ClimateCard2: WeatherCard = _
+  var ClimateCard3: WeatherCard = _
   var NoClimate: Object = _
 
   override def beforeEach(context: BeforeEach): Unit = {
-    ClimateCard1 = new ClimateCard(name1)
-    ClimateCard2 = new ClimateCard(name1)
-    ClimateCard3 = new ClimateCard(name2)
+    ClimateCard1 = new WeatherCard(name1, description)
+    ClimateCard2 = new WeatherCard(name1, description)
+    ClimateCard3 = new WeatherCard(name2, description)
     NoClimate = new Object()
   }
 
@@ -26,7 +27,7 @@ class ClimateCardTest extends FunSuite {
   }
 
   test("A climate card is a climate type card ") {
-    assertEquals(ClimateCard2.tipo, "Climate")
+    assertEquals(ClimateCard2.Cardtype, "Weather")
   }
 
   test("Two cards with the same name should be the same"){

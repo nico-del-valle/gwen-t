@@ -8,6 +8,7 @@ package gwent
  *
  * @constructor Creates a Combat Card with a name, a specific damage, with a combatType Siege
  */
-private class SiegeCard (val name: String, damage: Int) extends AbstractCombatCard(name,damage,"Siege") {
-   val combatType = "Siege"
+private class SiegeCard (val name: String, description: String, damage: Int)
+  extends AbstractCombatCard(name, description, damage) {
+   val Cardtype = "Siege"
 }

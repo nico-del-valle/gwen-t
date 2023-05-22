@@ -8,6 +8,7 @@ class MeleeCardTest extends FunSuite {
   val name2: String = "Ciri"
   val damage1: Int = 1
   val damage2: Int = 2
+  val description: String = "a"
 
 
 
@@ -18,9 +19,9 @@ class MeleeCardTest extends FunSuite {
 
 
   override def beforeEach(context: BeforeEach): Unit = {
-    MeleeCard1 = new MeleeCard(name1, damage1)
-    MeleeCard2 = new MeleeCard(name2, damage2)
-    MeleeCard3 = new MeleeCard(name1,damage1)
+    MeleeCard1 = new MeleeCard(name1, description, damage1)
+    MeleeCard2 = new MeleeCard(name2, description, damage2)
+    MeleeCard3 = new MeleeCard(name1, description, damage1)
     NoMelee = new Object()
 
   }
@@ -29,19 +30,18 @@ class MeleeCardTest extends FunSuite {
     assertEquals(MeleeCard1.name, name1)
   }
 
-  test("A Melee card is a Combat type card ") {
-    assertEquals(MeleeCard2.tipo, "Combat")
+  test("A card has a description") {
+    assertEquals(MeleeCard2.description, "a")
   }
 
   test("A Melee card has a damage value") {
     assertEquals(MeleeCard1.damage, damage1)
   }
-
-  test("A combat card can gain or lose damage "){
-    MeleeCard1.DamageChange(1)
-    assertEquals(MeleeCard1.damage, 2)
-    MeleeCard2.DamageChange(-3)
-    assertEquals(MeleeCard2.damage, 1) // the minimun damage is 1
+  test("A melee card has a melee Cardtype"){
+    assertEquals(MeleeCard1.Cardtype, "Melee")
+  }
+  test("A card has a currentPower"){
+    assertEquals(MeleeCard1.currentPower, damage1)
   }
 
   test("If two cards have the same name should be the same"){

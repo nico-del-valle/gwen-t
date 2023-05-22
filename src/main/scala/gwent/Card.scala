@@ -22,5 +22,7 @@ trait Card {
   * 
   * This val represent the type of the card, such as Climate or Combat
   */
- val tipo: String
+ val description: String
+
+ val Cardtype: String
 }

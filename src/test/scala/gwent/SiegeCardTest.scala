@@ -9,6 +9,7 @@ class SiegeCardTest extends FunSuite {
   val name2: String = "Ciri"
   val damage1: Int = 1
   val damage2: Int = 2
+  val description: String = "a"
 
 
   var SiegeCard1: SiegeCard = _
@@ -17,8 +18,8 @@ class SiegeCardTest extends FunSuite {
   var NoSiege: Object = _
 
   override def beforeEach(context: BeforeEach): Unit = {
-    SiegeCard1 = new SiegeCard(name1, damage1)
-    SiegeCard2 = new SiegeCard(name2, damage2)
+    SiegeCard1 = new SiegeCard(name1, description, damage1)
+    SiegeCard2 = new SiegeCard(name2, description, damage2)
     NoSiege = new Object()
   }
 
@@ -26,20 +27,17 @@ class SiegeCardTest extends FunSuite {
     assertEquals(SiegeCard1.name, name1)
   }
 
-  test("A Siege card is a combat card Type (tipo) ") {
-    assertEquals(SiegeCard2.tipo, "Combat")
+  test("A Siege card has a Siege Cardtype") {
+    assertEquals(SiegeCard2.Cardtype, "Siege")
   }
 
   test("A Siege card can be created with damage value") {
     assertEquals(SiegeCard1.damage, damage1)
   }
-
-  test("A combat card can gain or lose damage ") {
-    SiegeCard1.DamageChange(1)
-    assertEquals(SiegeCard1.damage, 2)
-    SiegeCard2.DamageChange(-3)
-    assertEquals(SiegeCard2.damage, 1) // damage can be less than 1
+  test("A card has a currentPower") {
+    assertEquals(SiegeCard1.currentPower, damage1)
   }
+
 
   test("SiegeCard compared with a non-SiegeCard, return False") {
     assert(!SiegeCard1.equals(NoSiege))

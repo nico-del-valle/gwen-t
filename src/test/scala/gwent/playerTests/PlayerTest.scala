@@ -1,7 +1,8 @@
 package cl.uchile.dcc
-package gwent
+package gwent.playerTests
 
-import gwent.Player
+import gwent.cards.{MeleeCard, RangedCard, SiegeCard, WeatherCard}
+import gwent.player.Player
 
 import munit.FunSuite
 

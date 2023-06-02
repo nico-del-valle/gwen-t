@@ -1,5 +1,8 @@
 package cl.uchile.dcc
-package gwent
+package gwent.gameBoardTest
+
+import gwent.cards.{MeleeCard, RangedCard, SiegeCard, WeatherCard}
+import gwent.gameBoard.GameBoard
 
 import munit.FunSuite
 
@@ -45,7 +48,7 @@ class GameBoardTest extends FunSuite {
     assertEquals(board.meleeBoardP2, List(meleeCard))
     assertEquals(board.rangedBoardP2, List(rangedCard))
     assertEquals(board.siegeBoardP2, List(siegeCard))
-    assertEquals(board.WeatherBoard, List(weatherCard))
+    assertEquals(board.weatherBoard, List(weatherCard))
   }
 
   test("you can remove cards from the board"){
@@ -80,7 +83,7 @@ class GameBoardTest extends FunSuite {
     assertEquals(board.rangedBoardP2, List())
     assertEquals(board.siegeBoardP2, List())
 
-    assertEquals(board.WeatherBoard, List())
+    assertEquals(board.weatherBoard, List())
   }
 
 

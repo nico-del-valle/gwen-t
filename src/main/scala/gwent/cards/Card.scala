@@ -1,6 +1,5 @@
 package cl.uchile.dcc
-package gwent
-
+package gwent.cards
 
 /**
  *  A trait representing a generic card
@@ -18,11 +17,15 @@ trait Card {
   */
  val name: String
 
- /** The type of the card
+ /** The description of the card
   * 
   * This val represent the type of the card, such as Climate or Combat
   */
  val description: String
 
+ /** The type of the card
+  *
+  * This val represent the type of the card, such as Climate, Ranged, Melee, Siege
+  */
  val Cardtype: String
 }

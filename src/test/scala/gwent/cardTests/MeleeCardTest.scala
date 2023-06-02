@@ -1,5 +1,7 @@
 package cl.uchile.dcc
-package gwent
+package gwent.cardTests
+
+import gwent.cards.MeleeCard
 
 import munit.FunSuite
 

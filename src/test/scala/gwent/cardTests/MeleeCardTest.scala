@@ -1,8 +1,7 @@
 package cl.uchile.dcc
 package gwent.cardTests
 
-import gwent.cards.MeleeCard
-
+import cl.uchile.dcc.gwent.model.cards.MeleeCard
 import munit.FunSuite
 
 class MeleeCardTest extends FunSuite {

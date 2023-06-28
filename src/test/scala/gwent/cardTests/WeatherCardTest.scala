@@ -1,8 +1,7 @@
 package cl.uchile.dcc
 package gwent.cardTests
 
-import gwent.cards.WeatherCard
-
+import cl.uchile.dcc.gwent.model.cards.WeatherCard
 import munit.FunSuite
 
 

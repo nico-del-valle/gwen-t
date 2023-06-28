@@ -1,7 +1,9 @@
 package cl.uchile.dcc
-package gwent.gameBoard
+package gwent.model.gameBoard
 
-import gwent.cards.*
+import gwent.model.cards.*
+
+import cl.uchile.dcc.gwent.model.cards.{Card, MeleeCard, RangedCard, SiegeCard, WeatherCard}
 
 /**
  * @param _meleeBoardP1 Player 1 MeleeCard zone
@@ -28,6 +30,16 @@ class GameBoard {
   private var _siegeBoardP2: List[SiegeCard] = List()
   private var _WeatherBoard: List[WeatherCard] = List()
 
+  var meleeDamageP1: Int = 0
+  var rangedDamageP1: Int = 0
+  var siegeDamageP1: Int = 0
+  var P1Damage: Int = 0
+
+
+  var meleeDamageP2: Int = 0
+  var rangedDamageP2: Int = 0
+  var siegeDamageP2: Int = 0
+  var P2Damage: Int = 0
 
 
   /** _meleeBoardP1 getter
@@ -264,4 +276,80 @@ class GameBoard {
     siegeBoardP2 = List()
 
   }
+
+  def EscarchaEffect(): Unit = {
+    val meleeCards = meleeBoardP1 ::: meleeBoardP2
+    for (card <- meleeCards) {
+      card.currentPower = 1
+    }
+  }
+  def NieblaEffect(): Unit = {
+    val rangedCards = rangedBoardP1 ::: rangedBoardP2
+    for (card <- rangedCards) {
+     card.currentPower = 1
+    }
+  }
+
+  def LluviaEffect(): Unit = {
+    val siegeCards = siegeBoardP1 ::: siegeBoardP2
+    for (card <- siegeCards) {
+      card.currentPower = 1
+    }
+  }
+
+
+  def ApplyWeather(): Unit = {
+    if (weatherBoard.exists(_.name == "Escarcha Mordiente")) {
+      EscarchaEffect()
+    } else if (weatherBoard.exists(_.name == "Niebla Impenetrable")) {
+      NieblaEffect()
+    } else if (weatherBoard.exists(_.name == "Lluvia Torrencial")) {
+      LluviaEffect()
+    } else {
+
+    }
+  }
+
+
+
+  def calculateDamageP1(): Unit  = {
+
+    for (card <- meleeBoardP1) {
+      meleeDamageP1 +=  card.currentPower
+    }
+
+    for (card <- rangedBoardP1) {
+      rangedDamageP1 += card.currentPower
+    }
+
+
+    for (card <- siegeBoardP1){
+      siegeDamageP1 += card.currentPower
+    }
+
+    P1Damage = meleeDamageP1 + rangedDamageP1 + siegeDamageP1
+
+  }
+
+  def calculateDamageP2(): Unit = {
+
+
+
+    for (card <- meleeBoardP2) {
+      meleeDamageP2 += card.currentPower
+    }
+
+      for (card <- rangedBoardP2) {
+      rangedDamageP2 += card.currentPower
+    }
+
+
+      for (card <- siegeBoardP2) {
+      siegeDamageP2 += card.currentPower
+    }
+
+    P2Damage = meleeDamageP2 + rangedDamageP2 + siegeDamageP2
+
+  }
+
 }

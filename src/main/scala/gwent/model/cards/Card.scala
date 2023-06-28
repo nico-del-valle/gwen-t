@@ -1,5 +1,5 @@
 package cl.uchile.dcc
-package gwent.cards
+package gwent.model.cards
 
 /**
  *  A trait representing a generic card

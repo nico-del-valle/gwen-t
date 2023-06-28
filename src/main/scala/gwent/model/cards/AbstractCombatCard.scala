@@ -1,5 +1,5 @@
 package cl.uchile.dcc
-package gwent.cards
+package gwent.model.cards
 
 import java.util.Objects
 
@@ -21,7 +21,7 @@ abstract class AbstractCombatCard protected (val name: String, val description: 
    *
    * @return the current damage
    */
-  def currentPower: Int = damage
+  var currentPower: Int = damage
 
 
 

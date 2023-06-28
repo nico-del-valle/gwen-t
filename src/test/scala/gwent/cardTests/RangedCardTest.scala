@@ -1,8 +1,7 @@
 package cl.uchile.dcc
 package gwent.cardTests
 
-import gwent.cards.RangedCard
-
+import cl.uchile.dcc.gwent.model.cards.RangedCard
 import munit.FunSuite
 
 

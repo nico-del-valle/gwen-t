@@ -1,7 +1,5 @@
 package cl.uchile.dcc
-package gwent.cards
-
-import gwent.cards.AbstractCombatCard
+package gwent.model.cards
 
 /** A class representing a Combat Ranged Card
  *

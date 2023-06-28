@@ -1,7 +1,7 @@
 package cl.uchile.dcc
-package gwent.player
+package gwent.model.player
 
-import gwent.cards.Card
+import cl.uchile.dcc.gwent.model.cards.Card
 
 /** A class representing a Player with name, card hand and card deck
  * 

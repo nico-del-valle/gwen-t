@@ -1,5 +1,5 @@
 package cl.uchile.dcc
-package gwent.cards
+package gwent.model.cards
 
 /** Class of a Climate Cards with a given name
  * 

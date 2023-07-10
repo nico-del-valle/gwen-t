@@ -7,7 +7,7 @@ import gwent.GameController
 class StartingGameState(context: GameController) extends GameState(context){
 
   override def toSortingWhoStartState(): Unit = {
-    context.state = new SortingWhoStartState(context)
+    context.state = new SortingState(context)
 
   }
 

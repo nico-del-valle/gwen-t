@@ -38,7 +38,7 @@ class PlayerTest extends FunSuite {
     }
 
     test("A player has initial life") {
-      assertEquals(Player2.gems, 3)
+      assertEquals(Player2.gems, 2)
     }
 
     test("A player has deck") {
@@ -53,12 +53,11 @@ class PlayerTest extends FunSuite {
 
     test("A player can loose gems"){
       Player1.lose()
-      assertEquals(Player1.gems, 2)
-      Player1.lose()
       assertEquals(Player1.gems, 1)
       Player1.lose()
       assertEquals(Player1.gems, 0)
       Player1.lose()
+
       assertEquals(Player1.gems, 0) // It can be less than 0
     }
 

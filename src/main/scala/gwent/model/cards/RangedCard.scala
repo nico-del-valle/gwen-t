@@ -1,6 +1,9 @@
 package cl.uchile.dcc
 package gwent.model.cards
 
+import gwent.model.gameBoard.RangedBoard
+import gwent.model.player.Player
+
 /** A class representing a Combat Ranged Card
  *
  * @param name The name of the card
@@ -9,5 +12,13 @@ package gwent.model.cards
  */
 
 class RangedCard (name: String, description: String, damage: Int) extends AbstractCombatCard(name,description, damage) {
-  val Cardtype = "Ranged"
+
+  override def addCard(player: Player): Unit = {
+    player.rangedBoard.addCard(this)
+    player.removeCardFromHand(this)
+    }
+
+  override def removeCard(player: Player): Unit = {
+      player.rangedBoard.removeCard(this)
+      }
 }

@@ -1,6 +1,9 @@
 package cl.uchile.dcc
 package gwent.model.cards
 
+import gwent.model.gameBoard.WeatherBoard
+import gwent.model.player.Player
+
 /** Class of a Climate Cards with a given name
  * 
  * @param name The card name
@@ -9,12 +12,27 @@ package gwent.model.cards
  */
 class WeatherCard(val name: String, val description: String) extends Card {
 
-  /** The type of the cards
-   *
-   * Describes where it can be placed
-   */
+  
 
-  val Cardtype = "Weather"
+  override def addCard(player: Player): Unit = {
+    player.playWeatherCard(this)
+  }
+
+  override def removeCard(player: Player): Unit = {
+   WeatherBoard.removeCard()
+  }
+
+
+
+
+
+
+
+
+
+
+
+
 
   /**
    * 
@@ -22,7 +40,6 @@ class WeatherCard(val name: String, val description: String) extends Card {
    * @return true if 
    */
 
-  
 
   override def equals(obj: Any): Boolean = {
     if (obj.isInstanceOf[WeatherCard]) {

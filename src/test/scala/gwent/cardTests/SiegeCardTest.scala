@@ -27,11 +27,7 @@ class SiegeCardTest extends FunSuite {
   test("A Siege card can be created with a name") {
     assertEquals(SiegeCard1.name, name1)
   }
-
-  test("A Siege card has a Siege Cardtype") {
-    assertEquals(SiegeCard2.Cardtype, "Siege")
-  }
-
+  
   test("A Siege card can be created with damage value") {
     assertEquals(SiegeCard1.damage, damage1)
   }

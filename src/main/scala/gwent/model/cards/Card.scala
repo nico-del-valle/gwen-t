@@ -1,6 +1,10 @@
 package cl.uchile.dcc
 package gwent.model.cards
 
+import gwent.model.player.Player
+
+import jdk.incubator.concurrent.ScopedValue.Carrier
+
 /**
  *  A trait representing a generic card
  *  
@@ -22,10 +26,11 @@ trait Card {
   * This val represent the type of the card, such as Climate or Combat
   */
  val description: String
+ 
+ def addCard(player: Player): Unit
 
- /** The type of the card
-  *
-  * This val represent the type of the card, such as Climate, Ranged, Melee, Siege
-  */
- val Cardtype: String
+ def removeCard(player: Player): Unit
+
+
+
 }

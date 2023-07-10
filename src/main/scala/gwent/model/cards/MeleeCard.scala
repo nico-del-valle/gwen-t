@@ -1,6 +1,10 @@
 package cl.uchile.dcc
 package gwent.model.cards
 
+import gwent.model.player.Player
+
+import gwent.model.gameBoard.MeleeBoard
+
 /** A class representing a Combat Melee Card
  *
  * @param name The name of the card
@@ -9,5 +13,15 @@ package gwent.model.cards
  */
 
 class MeleeCard (name: String,description: String, damage: Int) extends AbstractCombatCard(name, description, damage) {
-  val Cardtype = "Melee"
+
+  override def addCard(player: Player): Unit = {
+      player.meleeBoard.addCard(this)
+      player.removeCardFromHand(this)
+    }
+
+  
+  override def removeCard(player: Player): Unit = {
+      player.meleeBoard.removeCard(this)
+    }
+
 }

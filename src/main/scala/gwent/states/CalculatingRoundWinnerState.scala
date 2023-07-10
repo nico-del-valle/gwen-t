@@ -2,6 +2,7 @@ package cl.uchile.dcc
 package gwent.states
 
 import gwent.GameController
+import gwent.model.player.Player
 
 class CalculatingRoundWinnerState (context: GameController) extends GameState(context) {
 
@@ -11,6 +12,12 @@ class CalculatingRoundWinnerState (context: GameController) extends GameState(co
     context.state = new RestartingRoundState(context)
   }
 
-  // remember to make another state, the final state
+
+
+  override def doAction(Player_1: Player, Player_2: Player): Unit = {
+    context.Roundwinner(Player_1, Player_2)
+  }
+
+
 
 }

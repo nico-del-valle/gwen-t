@@ -30,10 +30,6 @@ class RangedCardTest extends FunSuite {
     assertEquals(RangedCard1.name, name1)
   }
 
-  test("A Ranged card has Ranged CardType ") {
-    assertEquals(RangedCard2.Cardtype, "Ranged")
-  }
-
   test("A Ranged card has a damage value") {
     assertEquals(RangedCard1.damage, damage1)
   }

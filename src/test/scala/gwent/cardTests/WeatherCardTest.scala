@@ -27,10 +27,6 @@ class WeatherCardTest extends FunSuite {
     assertEquals(ClimateCard1.name, name1)
   }
 
-  test("A climate card is a climate type card ") {
-    assertEquals(ClimateCard2.Cardtype, "Weather")
-  }
-
   test("Two cards with the same name should be the same"){
     assertEquals(ClimateCard1, ClimateCard2)
     assertNotEquals(ClimateCard2, ClimateCard3)

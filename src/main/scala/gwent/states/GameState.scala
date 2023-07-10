@@ -2,6 +2,7 @@ package cl.uchile.dcc
 package gwent.states
 
 import gwent.GameController
+import gwent.model.player.Player
 
 /** Represents a state in the game, as a part of the State Design Pattern implementation.
  *
@@ -42,21 +43,20 @@ class GameState protected(val context: GameController) {
     transitionError("SortingWhoStartState")
   }
 
-  def toSelectingActionP1State(): Unit = {
-    transitionError("SelectingActionP1State")
+  def toSelectingActionState(): Unit = {
+    transitionError("SelectingActionState")
   }
 
-  def toSelectingCardP1State(): Unit = {
-    transitionError("SelectingCardP1State")
+  def toSelectingCardState(): Unit = {
+    transitionError("SelectingCardState")
   }
 
-  def toSelectingActionP2State(): Unit = {
-    transitionError("SelectingActionP2State")
+  def toEndGameState(): Unit = {
+    transitionError("EndGameState")
   }
 
-  def toSelectingCardP2State(): Unit = {
-    transitionError("SelectingCardP2State")
-  }
+
+
 
   def toCalculatingRoundWinnerState(): Unit = {
     transitionError("CalculatingRoundWinnerState")
@@ -67,6 +67,9 @@ class GameState protected(val context: GameController) {
    * subclasses to provide the appropriate behavior.
    */
 
+  def doAction(Player_1: Player, Player_2: Player): Unit = {
+    //do nothing
+  }
 
 
 

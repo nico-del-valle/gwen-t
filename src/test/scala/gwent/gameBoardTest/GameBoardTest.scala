@@ -1,9 +1,9 @@
 package cl.uchile.dcc
 package gwent.gameBoardTest
 
-import cl.uchile.dcc.gwent.model.cards.{MeleeCard, RangedCard, SiegeCard, WeatherCard}
-import cl.uchile.dcc.gwent.model.gameBoard.GameBoard
-
+import cl.uchile.dcc.gwent.model.cards.{Card, MeleeCard, RangedCard, SiegeCard, WeatherCard }
+import cl.uchile.dcc.gwent.model.gameBoard.WeatherBoard
+import cl.uchile.dcc.gwent.model.player.Player
 import munit.FunSuite
 
 class GameBoardTest extends FunSuite {
@@ -24,7 +24,9 @@ class GameBoardTest extends FunSuite {
   var EscarchaCard: WeatherCard = _
   var NieblaCard: WeatherCard = _
   var LluviaCard: WeatherCard = _
-  var board: GameBoard = _
+
+  var P1: Player = _
+  var P2: Player = _
 
 
   override def beforeEach(context: BeforeEach): Unit = {
@@ -35,124 +37,140 @@ class GameBoardTest extends FunSuite {
     EscarchaCard = new WeatherCard(escarcha, description)
     NieblaCard = new WeatherCard(niebla, description)
     LluviaCard = new WeatherCard(lluvia, description)
-    board = new GameBoard()
+
+    P1 = new Player("Yo", List(meleeCard,rangedCard,siegeCard,weatherCard), List())
+    P2 = new Player("No yo", List(meleeCard,rangedCard,siegeCard,weatherCard), List())
   }
 
 
   test("you can add a card to the board and it goes to its specific place "){
-    board.addCardPlayer1(meleeCard)
-    board.addCardPlayer1(rangedCard)
-    board.addCardPlayer1(siegeCard)
-
-    board.addCardPlayer2(meleeCard)
-    board.addCardPlayer2(rangedCard)
-    board.addCardPlayer2(siegeCard)
-
-    board.addCardPlayer1(weatherCard)
-    board.addCardPlayer2(weatherCard)
-
-    assertEquals(board.meleeBoardP1, List(meleeCard))
-    assertEquals(board.rangedBoardP1, List(rangedCard))
-    assertEquals(board.siegeBoardP1, List(siegeCard))
-    assertEquals(board.meleeBoardP2, List(meleeCard))
-    assertEquals(board.rangedBoardP2, List(rangedCard))
-    assertEquals(board.siegeBoardP2, List(siegeCard))
-    assertEquals(board.weatherBoard, List(weatherCard))
-  }
-
-  test("you can remove cards from the board"){
-    board.addCardPlayer1(meleeCard)
-    board.addCardPlayer1(rangedCard)
-    board.addCardPlayer1(siegeCard)
-
-    board.addCardPlayer2(meleeCard)
-    board.addCardPlayer2(rangedCard)
-    board.addCardPlayer2(siegeCard)
-
-    board.addCardPlayer1(weatherCard)
-    board.addCardPlayer2(weatherCard)
+    meleeCard.addCard(P1)
+    siegeCard.addCard(P1)
+    rangedCard.addCard(P1)
+    siegeCard.addCard(P2)
+    weatherCard.addCard(P2)
+    NieblaCard.addCard(P1)
 
 
-    board.removeCardPlayer1(meleeCard)
-    board.removeCardPlayer1(rangedCard)
-    board.removeCardPlayer1(siegeCard)
-
-    board.removeCardPlayer2(meleeCard)
-    board.removeCardPlayer2(rangedCard)
-    board.removeCardPlayer2(siegeCard)
-
-    board.removeCardPlayer1(weatherCard)
-    board.removeCardPlayer2(weatherCard)
-
-    assertEquals(board.meleeBoardP1, List())
-    assertEquals(board.rangedBoardP1, List())
-    assertEquals(board.siegeBoardP1, List())
-
-    assertEquals(board.meleeBoardP2, List())
-    assertEquals(board.rangedBoardP2, List())
-    assertEquals(board.siegeBoardP2, List())
-
-    assertEquals(board.weatherBoard, List())
-  }
-
-
-  test("you can clear the deck") {
-
-    board.addCardPlayer1(meleeCard)
-    board.addCardPlayer2(siegeCard)
-    board.addCardPlayer1(rangedCard)
-
-    board.clearBoard()
-
-    assertEquals(board.meleeBoardP1, List())
-    assertEquals(board.rangedBoardP1, List())
-    assertEquals(board.siegeBoardP1, List())
-    assertEquals(board.meleeBoardP2, List())
-    assertEquals(board.rangedBoardP2, List())
-    assertEquals(board.siegeBoardP2, List())
+    assertEquals (P1.meleeBoard.cards, List(meleeCard))
+    assertEquals(P1.rangedBoard.cards, List(rangedCard))
+    assertEquals(P1.siegeBoard.cards, List(siegeCard))
+    assertEquals(P2.meleeBoard.cards, List())
+    assertEquals(P2.siegeBoard.cards, List(siegeCard))
+    assertEquals(WeatherBoard.cards, Option(NieblaCard))
+    assertEquals(WeatherBoard.cards, Option(NieblaCard))
 
   }
 
-  test("You can calculate actual power"){
-    board.addCardPlayer1(meleeCard)
-    board.addCardPlayer1(siegeCard)
-    board.addCardPlayer1(rangedCard)
-    board.calculateDamageP1()
-    assertEquals(board.P1Damage, 7)
+
+test("you can remove cards from the board") {
+  meleeCard.addCard(P1)
+  rangedCard.addCard(P1)
+  siegeCard.addCard(P1)
+
+  meleeCard.addCard(P2)
+  rangedCard.addCard(P2)
+  siegeCard.addCard(P2)
+
+  weatherCard.addCard(P1)
+
+  meleeCard.removeCard(P1)
+  rangedCard.removeCard(P1)
+  siegeCard.removeCard(P1)
+  meleeCard.removeCard(P2)
+  rangedCard.removeCard(P2)
+  siegeCard.removeCard(P2)
+
+  weatherCard.removeCard(P1)
+
+
+  assertEquals(P1.meleeBoard.cards, List())
+  assertEquals(P1.rangedBoard.cards, List())
+  assertEquals(P1.siegeBoard.cards, List())
+
+  assertEquals(P2.meleeBoard.cards, List())
+  assertEquals(P2.rangedBoard.cards, List())
+  assertEquals(P2.siegeBoard.cards, List())
+  assertEquals(WeatherBoard.cards, None)
+}
+
+
+
+
+
+  test("you can clear the board") {
+
+    meleeCard.addCard(P1)
+    siegeCard.addCard(P2)
+    rangedCard.addCard(P2)
+    NieblaCard.addCard(P2)
+
+    P1.clearPlayerBoard()
+    P2.clearPlayerBoard()
+
+    assertEquals(P1.meleeBoard.cards, List())
+    assertEquals(P1.rangedBoard.cards, List())
+    assertEquals(P1.siegeBoard.cards, List())
+    assertEquals(P2.meleeBoard.cards, List())
+    assertEquals(P2.rangedBoard.cards, List())
+    assertEquals(P2.siegeBoard.cards, List())
+    assertEquals(WeatherBoard.cards, None)
+
   }
 
-  test("if you use a weather card with name 'Escarcha Mordiente', all the melee card has 1 current power"){
-    board.addCardPlayer1(meleeCard)
-    board.addCardPlayer1(siegeCard)
-    board.addCardPlayer1(rangedCard)
-    board.addCardPlayer1(EscarchaCard)
-    board.ApplyWeather()
-    board.calculateDamageP1()
-    assertEquals(board.P1Damage, 5 ) // original = 3 + 2 + 2 = 7, after = 1 + 2 + 2 = 5
+    test("You can calculate actual power"){
+      meleeCard.addCard(P1)
+      rangedCard.addCard(P1)
+      siegeCard.addCard(P1)
+      val damage = P1.calculateDamage()
+      assertEquals(damage, 7)
+    }
 
-  }
+    test("if you use a weather card with name 'Escarcha Mordiente', all the melee card has 1 current power"){
+      meleeCard.addCard(P1)
+      rangedCard.addCard(P1)
+      siegeCard.addCard(P1)
+      EscarchaCard.addCard(P1)
 
-  test("if you use a weather card with name 'Niebla Impenetrable', all the ranged card has 1 current power") {
-    board.addCardPlayer1(meleeCard)
-    board.addCardPlayer1(siegeCard)
-    board.addCardPlayer1(rangedCard)
-    board.addCardPlayer1(NieblaCard)
-    board.ApplyWeather()
-    board.calculateDamageP1()
+      val damage =P1.calculateDamage()
+      assertEquals(damage, 5 ) // original = 3 + 2 + 2 = 7, after = 1 + 2 + 2 = 5
 
-    assertEquals(board.P1Damage, 6) // original = 3 + 2 + 2 = 7, after = 3 + 1 + 2 = 6
-  }
+    }
 
-  test("if you use a weather card with name 'Lluvia Torrencial', all the siege card has 1 current power") {
-    board.addCardPlayer1(meleeCard)
-    board.addCardPlayer1(siegeCard)
-    board.addCardPlayer1(rangedCard)
-    board.addCardPlayer2(LluviaCard)
-    board.ApplyWeather()
-    board.calculateDamageP1()
+    test("if you use a weather card with name 'Niebla Impenetrable', all the ranged card has 1 current power") {
+      meleeCard.addCard(P1)
+      rangedCard.addCard(P1)
+      siegeCard.addCard(P1)
+      NieblaCard.addCard(P1)
 
-    assertEquals(board.P1Damage, 6) // original = 3 + 2 + 2 = 7, after = 3 + 2 + 1 = 6
-  }
+      val damage = P1.calculateDamage()
+      assertEquals(damage, 6) // original = 3 + 2 + 2 = 7, after = 3 + 1 + 2 = 6
+    }
+
+    test("if you use a weather card with name 'Lluvia Torrencial', all the siege card has 1 current power") {
+      meleeCard.addCard(P1)
+      rangedCard.addCard(P1)
+      siegeCard.addCard(P1)
+      LluviaCard.addCard(P1)
+
+      val damage = P1.calculateDamage()
+      assertEquals(damage, 6) // original = 3 + 2 + 2 = 7, after = 3 + 2 + 1 = 6
+    }
+
+    test("if the player uses a hand, the card is no more is his hand"){
+      meleeCard.addCard(P1)
+      weatherCard.addCard(P1)
+
+      assertEquals(P1.hand, List(rangedCard,siegeCard))
+
+      rangedCard.addCard(P2)
+      siegeCard.addCard(P2)
+
+      assertEquals(P2.hand, List(meleeCard,weatherCard))
+    }
+
+
+
 
 
 }

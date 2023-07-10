@@ -38,9 +38,8 @@ class MeleeCardTest extends FunSuite {
   test("A Melee card has a damage value") {
     assertEquals(MeleeCard1.damage, damage1)
   }
-  test("A melee card has a melee Cardtype"){
-    assertEquals(MeleeCard1.Cardtype, "Melee")
-  }
+  
+  
   test("A card has a currentPower"){
     assertEquals(MeleeCard1.currentPower, damage1)
   }
